@@ -3,7 +3,7 @@ defmodule PullrequestsWeb.PageView do
 
   def color(date, reviewers) do
     time =
-      NaiveDateTime.local_now()
+      NaiveDateTime.utc_now()
       |> NaiveDateTime.diff(NaiveDateTime.from_iso8601!(date))
       |> Kernel.trunc()
 
