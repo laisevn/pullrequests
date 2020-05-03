@@ -36,17 +36,14 @@ defmodule PullrequestsWeb.PageController do
   end
 
   def get_reviewers(id) do
-    url =
-      "https://api.github.com/repos/#{System.get_env("REPO")}/#{System.get_env("REPO")}/pulls/#{
-        id
-      }/reviews"
+    url = "https://api.github.com/repos/#{repo()}/#{project()}/pulls/#{id}/reviews"
 
     HTTPoison.get!(url, headers())
   end
 
   defp get_request_pull_requests do
     url =
-      "https://api.github.com/repos/#{System.get_env("REPO")}/#{System.get_env("REPO")}/pulls?state=open&sort=created&direction=desc"
+      "https://api.github.com/repos/#{repo()}/#{project()}/pulls?state=open&sort=created&direction=desc"
 
     HTTPoison.get!(url, headers())
   end
@@ -56,6 +53,10 @@ defmodule PullrequestsWeb.PageController do
   end
 
   defp headers do
-    [Authorization: "token #{System.get_env("TOKEN")}"]
+    [Authorization: "token #{token()}"]
   end
+
+  defp token, do: System.get_env("TOKEN")
+  defp repo, do: System.get_env("REPO")
+  defp project, do: System.get_env("PROJECT")
 end
