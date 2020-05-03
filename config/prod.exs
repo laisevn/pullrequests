@@ -52,4 +52,8 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
+http: [port: {:system, "PORT"}],
+url: [scheme: "https", host: "stormy-peak-15054.herokuapp.com", port: 443],
+force_ssl: [rewrite_on: [:x_forwarded_proto]],
+
 import_config "prod.secret.exs"
