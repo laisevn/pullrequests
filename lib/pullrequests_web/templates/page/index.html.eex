@@ -1,0 +1,24 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome to %{name}!", name: "Pullrequester" %></h1>
+</section>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>User</th>
+    <th>Requested_reviewers</th>
+    <th>Reviewers</th>
+    <th>Created_at</th>
+  </tr>
+  <tr>
+  <%= Enum.map(@pull_requests, fn pull_request ->%>
+    <tr class="table-<%= color(pull_request["created_at"], pull_request["reviewers"]) %>">
+      <td><%=  text(pull_request["title"]) %></td>
+      <td><%=  pull_request["user"]["login"] %></td>
+      <td><%=  length(pull_request["requested_reviewers"]) %></td>
+      <td><%=  pull_request["reviewers"] %></td>
+      <td><%=  pull_request["created_at"] %></td>
+    <tr>
+  <% end) %>
+  </tr>
+</table>
