@@ -5,7 +5,7 @@ defmodule PullrequestsWeb.PageController do
     render(conn, "index.html", pull_requests: reviewers())
   end
 
-  def reviewers do
+  defp reviewers do
     get_response()
     |> Enum.map(fn x ->
       reviewers =
@@ -35,7 +35,7 @@ defmodule PullrequestsWeb.PageController do
     end
   end
 
-  def get_reviewers(id) do
+  defp get_reviewers(id) do
     url = "https://api.github.com/repos/#{repo()}/#{project()}/pulls/#{id}/reviews"
 
     HTTPoison.get!(url, headers())
