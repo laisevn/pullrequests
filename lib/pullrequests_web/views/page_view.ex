@@ -8,18 +8,16 @@ defmodule PullrequestsWeb.PageView do
       |> Kernel.trunc()
 
     result =
-      if reviewers == 0 do
-        "warning"
-      end
+      cond do
+        time / 86400 > 1 and reviewers == 0 ->
+          "danger"
 
-    result =
-      if time / 86400 > 1 and reviewers == 0 do
-        "danger"
-      else
-        "info"
-      end
+        reviewers == 0 ->
+          "warning"
 
-    result
+        true ->
+          "info"
+      end
   end
 
   def text(str) do

@@ -2,8 +2,8 @@
   <h1><%= gettext "Welcome to %{name}!", name: "Pullrequester" %></h1>
 </section>
 
-<table>
-  <tr>
+<table class="table table-hover">
+  <tr class="thead-dark">
     <th>Title</th>
     <th>User</th>
     <th>Requested_reviewers</th>
@@ -13,7 +13,7 @@
   <tr>
   <%= Enum.map(@pull_requests, fn pull_request ->%>
     <tr class="table-<%= color(pull_request["created_at"], pull_request["reviewers"]) %>">
-      <td><%=  text(pull_request["title"]) %></td>
+      <td><a href="<%= pull_request["html_url"] %>" target="_blank"><%=  text(pull_request["title"]) %><a/></td>
       <td><%=  pull_request["user"]["login"] %></td>
       <td><%=  length(pull_request["requested_reviewers"]) %></td>
       <td><%=  pull_request["reviewers"] %></td>
